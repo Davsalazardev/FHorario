@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="Horarios ITIID - Sistema Inteligente de Generacion de Horarios">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1F33" />
+      <stop offset="55%" stop-color="#0F2A44" />
+      <stop offset="100%" stop-color="#163A5F" />
+    </linearGradient>
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <pattern id="dotGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#334E68" opacity="0.45" />
+    </pattern>
+    <pattern id="blockedHatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#7F1D1D" opacity="0.55" />
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#F87171" stroke-width="2.2" opacity="0.55" />
+    </pattern>
+    <style>
+      .title { font: 700 38px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; fill: #FFFFFF; letter-spacing: -0.5px; }
+      .subtitle { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; fill: #BCCCDC; }
+      .kicker { font: 600 12px "SFMono-Regular", Consolas, Menlo, monospace; fill: #FBBF24; letter-spacing: 1.5px; }
+      .pill-text { font: 600 11.5px "SFMono-Regular", Consolas, Menlo, monospace; fill: #ECFDF5; }
+      .hdr-day { font: 600 10.5px "SFMono-Regular", Consolas, Menlo, monospace; fill: #9FB3C8; text-anchor: middle; }
+      .slot-lbl { font: 600 9.5px "SFMono-Regular", Consolas, Menlo, monospace; fill: #829AB1; }
+      .cell-txt { font: 700 9.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #F0F4F8; text-anchor: middle; }
+      .cell-blk { font: 700 8.5px "SFMono-Regular", Consolas, monospace; fill: #FECACA; text-anchor: middle; }
+
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.72; }
+        50% { opacity: 1; }
+      }
+      @keyframes blockAppear1 {
+        0%, 10% { opacity: 0.35; }
+        25%, 85% { opacity: 0.96; }
+        100% { opacity: 0.35; }
+      }
+      @keyframes blockAppear2 {
+        0%, 25% { opacity: 0.35; }
+        42%, 90% { opacity: 0.96; }
+        100% { opacity: 0.35; }
+      }
+      @keyframes blockAppear3 {
+        0%, 40% { opacity: 0.35; }
+        58%, 95% { opacity: 0.96; }
+        100% { opacity: 0.35; }
+      }
+      @keyframes scanLine {
+        0% { transform: translateY(0px); opacity: 0; }
+        15% { opacity: 0.65; }
+        85% { opacity: 0.65; }
+        100% { transform: translateY(156px); opacity: 0; }
+      }
+      .pulse { animation: pulseGlow 2.8s ease-in-out infinite; }
+      .b1 { animation: blockAppear1 6s ease-in-out infinite; }
+      .b2 { animation: blockAppear2 6s ease-in-out infinite; }
+      .b3 { animation: blockAppear3 6s ease-in-out infinite; }
+      .scanner { animation: scanLine 5.2s linear infinite; }
+    </style>
+  </defs>
+
+  <!-- Fondo principal -->
+  <rect width="1200" height="320" rx="16" fill="url(#bgGrad)" />
+  <rect width="1200" height="320" rx="16" fill="url(#dotGrid)" />
+  <rect x="0" y="0" width="10" height="320" rx="4" fill="url(#accentBar)" />
+
+  <!-- Columna izquierda: Identidad y KPIs -->
+  <text x="52" y="64" class="kicker">UPV · ITIID · FUNDAMENTOS DE INTELIGENCIA ARTIFICIAL</text>
+  <text x="52" y="114" class="title">Horarios ITIID</text>
+  <text x="52" y="146" class="subtitle">Sistema Inteligente de Generación y Reprogramación de Horarios</text>
+  <text x="52" y="172" class="subtitle">OR-Tools CP-SAT · Algoritmo Genético Memético · Búsqueda Local · Ollama (qwen2.5:7b)</text>
+
+  <!-- Chips de metricas verificadas -->
+  <g transform="translate(52, 206)">
+    <rect x="0" y="0" width="182" height="32" rx="16" fill="#065F46" stroke="#10B981" stroke-width="1" />
+    <circle cx="16" cy="16" r="4.5" fill="#34D399" class="pulse" />
+    <text x="30" y="20" class="pill-text">0 VIOLACIONES DURAS</text>
+
+    <rect x="194" y="0" width="186" height="32" rx="16" fill="#1E3A5F" stroke="#38BDF8" stroke-width="1" />
+    <text x="210" y="20" class="pill-text">98.6% ESTABILIDAD I4</text>
+
+    <rect x="392" y="0" width="176" height="32" rx="16" fill="#451A03" stroke="#F59E0B" stroke-width="1" />
+    <text x="408" y="20" class="pill-text">F1 1.000 · QWEN2.5</text>
+  </g>
+
+  <text x="52" y="280" style="font: 500 12.5px -apple-system, sans-serif; fill: #829AB1;">
+    Regla de diseño: el motor optimiza, el validador oficial juzga, el LLM traduce y explica.
+  </text>
+
+  <!-- Columna derecha: Grilla horaria animada -->
+  <g transform="translate(685, 36)">
+    <rect x="0" y="0" width="470" height="248" rx="12" fill="#081626" stroke="#243B53" stroke-width="1.5" />
+
+    <!-- Barra superior de ventana -->
+    <circle cx="20" cy="18" r="4.5" fill="#EF4444" opacity="0.85" />
+    <circle cx="36" cy="18" r="4.5" fill="#F59E0B" opacity="0.85" />
+    <circle cx="52" cy="18" r="4.5" fill="#10B981" opacity="0.85" />
+    <text x="240" y="21" class="hdr-day" style="fill:#BCCCDC;">CP-SAT · ESCENARIO C · 142 SESIONES</text>
+    <line x1="12" y1="32" x2="458" y2="32" stroke="#1F364D" stroke-width="1" />
+
+    <!-- Encabezados de dias -->
+    <text x="108" y="50" class="hdr-day">LUN</text>
+    <text x="184" y="50" class="hdr-day">MAR</text>
+    <text x="260" y="50" class="hdr-day">MIE</text>
+    <text x="336" y="50" class="hdr-day">JUE</text>
+    <text x="412" y="50" class="hdr-day">VIE</text>
+
+    <!-- Etiquetas de hora -->
+    <text x="18" y="82" class="slot-lbl">07:00</text>
+    <text x="18" y="122" class="slot-lbl">08:00</text>
+    <text x="18" y="162" class="slot-lbl">09:00</text>
+    <text x="18" y="202" class="slot-lbl">10:00</text>
+
+    <!-- Lineas de cuadricula -->
+    <g stroke="#182C42" stroke-width="1">
+      <line x1="68" y1="58" x2="452" y2="58" />
+      <line x1="68" y1="98" x2="452" y2="98" />
+      <line x1="68" y1="138" x2="452" y2="138" />
+      <line x1="68" y1="178" x2="452" y2="178" />
+      <line x1="68" y1="218" x2="452" y2="218" />
+    </g>
+
+    <!-- Bloques animados de clases -->
+    <g class="b1">
+      <rect x="74" y="63" width="68" height="30" rx="5" fill="#1D4ED8" />
+      <text x="108" y="81" class="cell-txt">FIA · L3</text>
+      <rect x="74" y="103" width="68" height="30" rx="5" fill="#047857" />
+      <text x="108" y="121" class="cell-txt">ISW · A1</text>
+      <rect x="302" y="103" width="68" height="30" rx="5" fill="#1D4ED8" />
+      <text x="336" y="121" class="cell-txt">FIA · L2</text>
+    </g>
+
+    <!-- Bloques compartidos bloqueados -->
+    <rect x="150" y="63" width="68" height="30" rx="5" fill="url(#blockedHatch)" stroke="#EF4444" stroke-width="1" />
+    <text x="184" y="81" class="cell-blk">OCUPADO</text>
+    <rect x="226" y="183" width="68" height="30" rx="5" fill="url(#blockedHatch)" stroke="#EF4444" stroke-width="1" />
+    <text x="260" y="201" class="cell-blk">IM · LAB</text>
+
+    <g class="b2">
+      <rect x="150" y="103" width="68" height="30" rx="5" fill="#0E7490" />
+      <text x="184" y="121" class="cell-txt">RED · L2</text>
+      <rect x="150" y="143" width="68" height="30" rx="5" fill="#1D4ED8" />
+      <text x="184" y="161" class="cell-txt">FIA · L1</text>
+      <rect x="378" y="63" width="68" height="30" rx="5" fill="#B45309" />
+      <text x="412" y="81" class="cell-txt">CLD · L4</text>
+    </g>
+
+    <g class="b3">
+      <rect x="226" y="63" width="68" height="30" rx="5" fill="#6D28D9" />
+      <text x="260" y="81" class="cell-txt">EDD · L3</text>
+      <rect x="226" y="103" width="68" height="30" rx="5" fill="#047857" />
+      <text x="260" y="121" class="cell-txt">ISW · A2</text>
+      <rect x="302" y="143" width="68" height="30" rx="5" fill="#0E7490" />
+      <text x="336" y="161" class="cell-txt">RED · L2</text>
+      <rect x="378" y="103" width="68" height="30" rx="5" fill="#1D4ED8" />
+      <text x="412" y="121" class="cell-txt">FIA · L3</text>
+      <rect x="378" y="143" width="68" height="30" rx="5" fill="#6D28D9" />
+      <text x="412" y="161" class="cell-txt">EDD · L1</text>
+    </g>
+
+    <!-- Linea de escaneo del validador oficial -->
+    <line x1="68" y1="60" x2="452" y2="60" stroke="#34D399" stroke-width="2" class="scanner" />
+
+    <!-- Pie de estado del validador -->
+    <text x="20" y="236" style="font: 600 10px monospace; fill: #34D399;">✓ kit/validator.py: FEASIBLE · soft=312 · gaps_doc=4 · t=0.63s (I4)</text>
+  </g>
+</svg>
