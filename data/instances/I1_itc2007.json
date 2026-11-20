@@ -1,0 +1,307 @@
+{
+  "id": "I1",
+  "name": "I1 - ITC-2007 (comp01_itc2007_mini)",
+  "description": "Instancia publica estilo CB-CTT ITC-2007 para validar motores antes de datos ITIID.",
+  "days": [
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes"
+  ],
+  "slot_labels": [
+    "07:00-08:00",
+    "08:00-09:00",
+    "09:00-10:00",
+    "10:00-11:00",
+    "11:00-12:00",
+    "12:00-13:00"
+  ],
+  "recess_slots": [],
+  "morning_cutoff_slot": 3,
+  "teachers": [
+    {
+      "id": "t000",
+      "name": "Docente t000",
+      "department": "ITC-2007",
+      "max_daily_hours": 6,
+      "unavailable_slots": [
+        [
+          0,
+          0
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "t001",
+      "name": "Docente t001",
+      "department": "ITC-2007",
+      "max_daily_hours": 6,
+      "unavailable_slots": [
+        [
+          4,
+          5
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "t002",
+      "name": "Docente t002",
+      "department": "ITC-2007",
+      "max_daily_hours": 6,
+      "unavailable_slots": [],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "t003",
+      "name": "Docente t003",
+      "department": "ITC-2007",
+      "max_daily_hours": 6,
+      "unavailable_slots": [
+        [
+          3,
+          5
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "t004",
+      "name": "Docente t004",
+      "department": "ITC-2007",
+      "max_daily_hours": 6,
+      "unavailable_slots": [
+        [
+          2,
+          3
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "t005",
+      "name": "Docente t005",
+      "department": "ITC-2007",
+      "max_daily_hours": 6,
+      "unavailable_slots": [
+        [
+          1,
+          0
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "q000",
+      "name": "Curriculum q000",
+      "quarter": 1,
+      "size": 30,
+      "max_daily_hours": 5
+    },
+    {
+      "id": "q001",
+      "name": "Curriculum q001",
+      "quarter": 1,
+      "size": 28,
+      "max_daily_hours": 5
+    },
+    {
+      "id": "q002",
+      "name": "Curriculum q002",
+      "quarter": 1,
+      "size": 25,
+      "max_daily_hours": 5
+    }
+  ],
+  "rooms": [
+    {
+      "id": "R1",
+      "name": "Aula R1",
+      "capacity": 35,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "R2",
+      "name": "Aula R2",
+      "capacity": 35,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "R3",
+      "name": "Aula R3",
+      "capacity": 30,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "R4",
+      "name": "Aula R4",
+      "capacity": 30,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    }
+  ],
+  "courses": [
+    {
+      "id": "c0001",
+      "name": "Curso c0001",
+      "group_id": "q000",
+      "teacher_id": "t000",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0002",
+      "name": "Curso c0002",
+      "group_id": "q000",
+      "teacher_id": "t001",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0003",
+      "name": "Curso c0003",
+      "group_id": "q000",
+      "teacher_id": "t002",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0004",
+      "name": "Curso c0004",
+      "group_id": "q000",
+      "teacher_id": "t003",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0005",
+      "name": "Curso c0005",
+      "group_id": "q001",
+      "teacher_id": "t000",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0006",
+      "name": "Curso c0006",
+      "group_id": "q001",
+      "teacher_id": "t004",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0007",
+      "name": "Curso c0007",
+      "group_id": "q001",
+      "teacher_id": "t001",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0008",
+      "name": "Curso c0008",
+      "group_id": "q001",
+      "teacher_id": "t005",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0009",
+      "name": "Curso c0009",
+      "group_id": "q002",
+      "teacher_id": "t002",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0010",
+      "name": "Curso c0010",
+      "group_id": "q002",
+      "teacher_id": "t003",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0011",
+      "name": "Curso c0011",
+      "group_id": "q002",
+      "teacher_id": "t004",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "c0012",
+      "name": "Curso c0012",
+      "group_id": "q002",
+      "teacher_id": "t005",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    }
+  ],
+  "preferences": []
+}

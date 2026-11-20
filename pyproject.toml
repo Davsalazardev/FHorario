@@ -1,0 +1,23 @@
+[project]
+name = "horarios-itiid"
+version = "1.0.0"
+description = "Sistema inteligente para la generacion de horarios de ITIID (OR-Tools CP-SAT, Algoritmo Genetico, Busqueda Local y LLM)"
+requires-python = ">=3.10"
+dependencies = [
+    "ortools>=9.10",
+    "pandas>=2.2",
+    "openpyxl>=3.1",
+    "reportlab>=4.2",
+    "numpy>=1.26",
+    "matplotlib>=3.9",
+    "pydantic>=2.7",
+    "requests>=2.32",
+    "streamlit>=1.38",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

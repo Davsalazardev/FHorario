@@ -1,0 +1,1243 @@
+{
+  "id": "I3",
+  "name": "I3 - Programa ITIID Completo (1o, 4o y 7o cuatrimestre)",
+  "description": "Caso completo del programa ITIID (6 grupos, 12 docentes, 8 aulas/labs, 34 materias, 142 sesiones) con recursos compartidos bloqueados.",
+  "days": [
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes"
+  ],
+  "slot_labels": [
+    "07:00-08:00",
+    "08:00-09:00",
+    "09:00-10:00",
+    "10:00-11:00",
+    "11:00-12:00",
+    "12:00-13:00",
+    "13:00-14:00",
+    "14:00-15:00"
+  ],
+  "recess_slots": [],
+  "morning_cutoff_slot": 4,
+  "teachers": [
+    {
+      "id": "DOC_01",
+      "name": "Docente 01 (IA)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          0,
+          7
+        ]
+      ],
+      "shared_occupied_slots": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "shared_with": [
+        "IM"
+      ]
+    },
+    {
+      "id": "DOC_02",
+      "name": "Docente 02 (Ing. Software)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          0,
+          0
+        ]
+      ],
+      "shared_occupied_slots": [
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "shared_with": [
+        "ISA"
+      ]
+    },
+    {
+      "id": "DOC_03",
+      "name": "Docente 03 (Redes)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "DOC_04",
+      "name": "Docente 04 (Bases de Datos)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          1,
+          7
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "DOC_05",
+      "name": "Docente 05 (Web/Movil)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          2,
+          0
+        ]
+      ],
+      "shared_occupied_slots": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "shared_with": [
+        "LAYGE"
+      ]
+    },
+    {
+      "id": "DOC_06",
+      "name": "Docente 06 (Ingles I)",
+      "department": "ITIID",
+      "max_daily_hours": 6,
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "shared_with": [
+        "IM",
+        "ISA"
+      ]
+    },
+    {
+      "id": "DOC_07",
+      "name": "Docente 07 (Programacion)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          4,
+          7
+        ]
+      ],
+      "shared_occupied_slots": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "shared_with": [
+        "IM"
+      ]
+    },
+    {
+      "id": "DOC_08",
+      "name": "Docente 08 (Matematicas)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          3,
+          0
+        ]
+      ],
+      "shared_occupied_slots": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "shared_with": [
+        "IM",
+        "ITM"
+      ]
+    },
+    {
+      "id": "DOC_09",
+      "name": "Docente 09 (Sistemas Operativos)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          0,
+          7
+        ],
+        [
+          2,
+          7
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "DOC_10",
+      "name": "Docente 10 (Estructuras Datos)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [
+        [
+          4,
+          0
+        ]
+      ],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "DOC_11",
+      "name": "Docente 11 (Arquitectura/Cloud)",
+      "department": "ITIID",
+      "max_daily_hours": 5,
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "shared_with": [
+        "ITM"
+      ]
+    },
+    {
+      "id": "DOC_12",
+      "name": "Docente 12 (Ingles II / Expresion)",
+      "department": "ITIID",
+      "max_daily_hours": 6,
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "shared_with": [
+        "LAYGE"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "ITIID_1A",
+      "name": "ITIID 1-A",
+      "quarter": 1,
+      "size": 36,
+      "max_daily_hours": 6
+    },
+    {
+      "id": "ITIID_1B",
+      "name": "ITIID 1-B",
+      "quarter": 1,
+      "size": 34,
+      "max_daily_hours": 6
+    },
+    {
+      "id": "ITIID_4A",
+      "name": "ITIID 4-A",
+      "quarter": 4,
+      "size": 31,
+      "max_daily_hours": 6
+    },
+    {
+      "id": "ITIID_4B",
+      "name": "ITIID 4-B",
+      "quarter": 4,
+      "size": 29,
+      "max_daily_hours": 6
+    },
+    {
+      "id": "ITIID_7A",
+      "name": "ITIID 7-A",
+      "quarter": 7,
+      "size": 30,
+      "max_daily_hours": 6
+    },
+    {
+      "id": "ITIID_7B",
+      "name": "ITIID 7-B",
+      "quarter": 7,
+      "size": 27,
+      "max_daily_hours": 6
+    }
+  ],
+  "rooms": [
+    {
+      "id": "AULA_01",
+      "name": "Aula B-101",
+      "capacity": 40,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "AULA_02",
+      "name": "Aula B-102",
+      "capacity": 38,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [],
+      "shared_with": []
+    },
+    {
+      "id": "AULA_03",
+      "name": "Aula B-103",
+      "capacity": 36,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "shared_with": [
+        "LAYGE"
+      ]
+    },
+    {
+      "id": "AULA_04",
+      "name": "Aula B-104",
+      "capacity": 35,
+      "room_type": "aula",
+      "equipment": [],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "shared_with": [
+        "IM"
+      ]
+    },
+    {
+      "id": "LAB_01",
+      "name": "Lab Computo 1",
+      "capacity": 38,
+      "room_type": "laboratorio",
+      "equipment": [
+        "pc",
+        "proyector",
+        "linux"
+      ],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "shared_with": [
+        "IM"
+      ]
+    },
+    {
+      "id": "LAB_02",
+      "name": "Lab Redes y Datos",
+      "capacity": 36,
+      "room_type": "laboratorio",
+      "equipment": [
+        "pc",
+        "redes",
+        "proyector"
+      ],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ]
+      ],
+      "shared_with": [
+        "ISA"
+      ]
+    },
+    {
+      "id": "LAB_03",
+      "name": "Lab Desarrollo SW",
+      "capacity": 36,
+      "room_type": "laboratorio",
+      "equipment": [
+        "pc",
+        "proyector",
+        "linux"
+      ],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "shared_with": [
+        "ITM"
+      ]
+    },
+    {
+      "id": "LAB_04",
+      "name": "Lab Inteligencia Artificial",
+      "capacity": 34,
+      "room_type": "laboratorio",
+      "equipment": [
+        "pc",
+        "gpu",
+        "linux",
+        "redes"
+      ],
+      "unavailable_slots": [],
+      "shared_occupied_slots": [
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "shared_with": [
+        "IM"
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "id": "C_1A_PRO",
+      "name": "Introduccion a Programacion",
+      "group_id": "ITIID_1A",
+      "teacher_id": "DOC_07",
+      "sessions_per_week": 5,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1A_MAT",
+      "name": "Matematicas Discretas",
+      "group_id": "ITIID_1A",
+      "teacher_id": "DOC_08",
+      "sessions_per_week": 5,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1A_ARQ",
+      "name": "Fundamentos de TI",
+      "group_id": "ITIID_1A",
+      "teacher_id": "DOC_11",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1A_SOP",
+      "name": "Introduccion a SO",
+      "group_id": "ITIID_1A",
+      "teacher_id": "DOC_09",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "linux"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1A_ING",
+      "name": "Ingles I",
+      "group_id": "ITIID_1A",
+      "teacher_id": "DOC_12",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1B_PRO",
+      "name": "Introduccion a Programacion",
+      "group_id": "ITIID_1B",
+      "teacher_id": "DOC_07",
+      "sessions_per_week": 5,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1B_MAT",
+      "name": "Matematicas Discretas",
+      "group_id": "ITIID_1B",
+      "teacher_id": "DOC_08",
+      "sessions_per_week": 5,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1B_ARQ",
+      "name": "Fundamentos de TI",
+      "group_id": "ITIID_1B",
+      "teacher_id": "DOC_11",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1B_SOP",
+      "name": "Introduccion a SO",
+      "group_id": "ITIID_1B",
+      "teacher_id": "DOC_09",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "linux"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_1B_ING",
+      "name": "Ingles I",
+      "group_id": "ITIID_1B",
+      "teacher_id": "DOC_12",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 1
+    },
+    {
+      "id": "C_4A_EDD",
+      "name": "Estructuras de Datos",
+      "group_id": "ITIID_4A",
+      "teacher_id": "DOC_10",
+      "sessions_per_week": 5,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4A_BDD",
+      "name": "Diseno de Bases de Datos",
+      "group_id": "ITIID_4A",
+      "teacher_id": "DOC_04",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4A_RED",
+      "name": "Fundamentos de Redes",
+      "group_id": "ITIID_4A",
+      "teacher_id": "DOC_03",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "redes"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4A_WEB",
+      "name": "Programacion Web I",
+      "group_id": "ITIID_4A",
+      "teacher_id": "DOC_05",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4A_ISW",
+      "name": "Analisis de Requisitos",
+      "group_id": "ITIID_4A",
+      "teacher_id": "DOC_02",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4A_ING",
+      "name": "Ingles IV",
+      "group_id": "ITIID_4A",
+      "teacher_id": "DOC_12",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4B_EDD",
+      "name": "Estructuras de Datos",
+      "group_id": "ITIID_4B",
+      "teacher_id": "DOC_10",
+      "sessions_per_week": 5,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4B_BDD",
+      "name": "Diseno de Bases de Datos",
+      "group_id": "ITIID_4B",
+      "teacher_id": "DOC_04",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4B_RED",
+      "name": "Fundamentos de Redes",
+      "group_id": "ITIID_4B",
+      "teacher_id": "DOC_03",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "redes"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4B_WEB",
+      "name": "Programacion Web I",
+      "group_id": "ITIID_4B",
+      "teacher_id": "DOC_05",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4B_ISW",
+      "name": "Analisis de Requisitos",
+      "group_id": "ITIID_4B",
+      "teacher_id": "DOC_02",
+      "sessions_per_week": 3,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_4B_ING",
+      "name": "Ingles IV",
+      "group_id": "ITIID_4B",
+      "teacher_id": "DOC_06",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 4
+    },
+    {
+      "id": "C_7A_FIA",
+      "name": "Fundamentos de IA",
+      "group_id": "ITIID_7A",
+      "teacher_id": "DOC_01",
+      "sessions_per_week": 5,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7A_ISW",
+      "name": "Ingenieria de Software",
+      "group_id": "ITIID_7A",
+      "teacher_id": "DOC_02",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7A_CLD",
+      "name": "Computo en la Nube",
+      "group_id": "ITIID_7A",
+      "teacher_id": "DOC_11",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "linux"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7A_SOP",
+      "name": "Sistemas Distribuidos",
+      "group_id": "ITIID_7A",
+      "teacher_id": "DOC_09",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "linux"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7A_WEB",
+      "name": "Aplicaciones Moviles",
+      "group_id": "ITIID_7A",
+      "teacher_id": "DOC_05",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7A_ING",
+      "name": "Ingles VII",
+      "group_id": "ITIID_7A",
+      "teacher_id": "DOC_06",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7B_FIA",
+      "name": "Fundamentos de IA",
+      "group_id": "ITIID_7B",
+      "teacher_id": "DOC_01",
+      "sessions_per_week": 5,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7B_ISW",
+      "name": "Ingenieria de Software",
+      "group_id": "ITIID_7B",
+      "teacher_id": "DOC_02",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7B_CLD",
+      "name": "Computo en la Nube",
+      "group_id": "ITIID_7B",
+      "teacher_id": "DOC_11",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "linux"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7B_SOP",
+      "name": "Sistemas Distribuidos",
+      "group_id": "ITIID_7B",
+      "teacher_id": "DOC_09",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "linux"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7B_EDD",
+      "name": "Mineria de Datos",
+      "group_id": "ITIID_7B",
+      "teacher_id": "DOC_10",
+      "sessions_per_week": 4,
+      "room_type": "laboratorio",
+      "required_equipment": [
+        "pc"
+      ],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    },
+    {
+      "id": "C_7B_ING",
+      "name": "Ingles VII",
+      "group_id": "ITIID_7B",
+      "teacher_id": "DOC_06",
+      "sessions_per_week": 4,
+      "room_type": "aula",
+      "required_equipment": [],
+      "max_sessions_per_day": 2,
+      "quarter": 7
+    }
+  ],
+  "preferences": [
+    {
+      "id": "P_01",
+      "teacher_id": "DOC_01",
+      "pref_type": "avoid_day",
+      "params": {
+        "day": 4
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Prefiero no tener clases los viernes porque tengo reuniones de academia.",
+      "status": "approved"
+    },
+    {
+      "id": "P_02",
+      "teacher_id": "DOC_02",
+      "pref_type": "avoid_slot",
+      "params": {
+        "slot": 0
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Por favor evitar la primera hora de 7:00 a 8:00 todos los dias.",
+      "status": "approved"
+    },
+    {
+      "id": "P_03",
+      "teacher_id": "DOC_03",
+      "pref_type": "prefer_morning",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Me conviene dar clases por la manana, antes de las 11:00.",
+      "status": "approved"
+    },
+    {
+      "id": "P_04",
+      "teacher_id": "DOC_04",
+      "pref_type": "prefer_afternoon",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Quisiera dar mis materias preferentemente en la tarde despues de las 11:00.",
+      "status": "approved"
+    },
+    {
+      "id": "P_05",
+      "teacher_id": "DOC_05",
+      "pref_type": "max_daily_hours",
+      "params": {
+        "max_hours": 3
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "No programar mas de 3 horas diarias de clase para poder atender tutorias.",
+      "status": "approved"
+    },
+    {
+      "id": "P_06",
+      "teacher_id": "DOC_06",
+      "pref_type": "compact_schedule",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Necesito un horario compacto sin huecos entre mis clases.",
+      "status": "approved"
+    },
+    {
+      "id": "P_07",
+      "teacher_id": "DOC_07",
+      "pref_type": "prefer_room_type",
+      "params": {
+        "room_type": "laboratorio"
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "De preferencia asignarme laboratorio para mis sesiones practicas.",
+      "status": "approved"
+    },
+    {
+      "id": "P_08",
+      "teacher_id": "DOC_08",
+      "pref_type": "avoid_slot",
+      "params": {
+        "day": 0,
+        "slot": 0
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "El lunes no puedo a primera hora (07:00-08:00) y prefiero bloques seguidos sin huecos.",
+      "status": "approved"
+    },
+    {
+      "id": "P_09",
+      "teacher_id": "DOC_08",
+      "pref_type": "compact_schedule",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "El lunes no puedo a primera hora (07:00-08:00) y prefiero bloques seguidos sin huecos.",
+      "status": "approved"
+    },
+    {
+      "id": "P_10",
+      "teacher_id": "DOC_01",
+      "pref_type": "avoid_slot",
+      "params": {
+        "slot": 7
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Evitar la ultima franja de 14:00 a 15:00 de ser posible.",
+      "status": "approved"
+    },
+    {
+      "id": "P_11",
+      "teacher_id": "DOC_02",
+      "pref_type": "max_daily_hours",
+      "params": {
+        "max_hours": 4
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Como maximo 4 horas al dia y preferiblemente en horario matutino.",
+      "status": "approved"
+    },
+    {
+      "id": "P_12",
+      "teacher_id": "DOC_02",
+      "pref_type": "prefer_morning",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Como maximo 4 horas al dia y preferiblemente en horario matutino.",
+      "status": "approved"
+    },
+    {
+      "id": "P_13",
+      "teacher_id": "DOC_03",
+      "pref_type": "avoid_day",
+      "params": {
+        "day": 3
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Si se puede, dejarme libre el dia jueves.",
+      "status": "approved"
+    },
+    {
+      "id": "P_14",
+      "teacher_id": "DOC_04",
+      "pref_type": "prefer_room_type",
+      "params": {
+        "room_type": "aula"
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Prefiero impartir en aula normal en lugar de laboratorio.",
+      "status": "approved"
+    },
+    {
+      "id": "P_15",
+      "teacher_id": "DOC_05",
+      "pref_type": "avoid_day",
+      "params": {
+        "day": 0
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "No me pongan clase los lunes, por favor.",
+      "status": "approved"
+    },
+    {
+      "id": "P_16",
+      "teacher_id": "DOC_06",
+      "pref_type": "prefer_afternoon",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Preferiria turno vespertino (tarde) y no mas de 4 horas por dia.",
+      "status": "approved"
+    },
+    {
+      "id": "P_17",
+      "teacher_id": "DOC_06",
+      "pref_type": "max_daily_hours",
+      "params": {
+        "max_hours": 4
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Preferiria turno vespertino (tarde) y no mas de 4 horas por dia.",
+      "status": "approved"
+    },
+    {
+      "id": "P_18",
+      "teacher_id": "DOC_07",
+      "pref_type": "compact_schedule",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Evitar huecos largos entre clases; prefiero horario corrido.",
+      "status": "approved"
+    },
+    {
+      "id": "P_19",
+      "teacher_id": "DOC_08",
+      "pref_type": "avoid_slot",
+      "params": {
+        "day": 2,
+        "slot": 6
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "No quiero dar clase los miercoles en la franja de 13:00 a 14:00.",
+      "status": "approved"
+    },
+    {
+      "id": "P_20",
+      "teacher_id": "DOC_09",
+      "pref_type": "prefer_morning",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Solicito trabajar solo por la manana y evitar los viernes.",
+      "status": "approved"
+    },
+    {
+      "id": "P_21",
+      "teacher_id": "DOC_09",
+      "pref_type": "avoid_day",
+      "params": {
+        "day": 4
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Solicito trabajar solo por la manana y evitar los viernes.",
+      "status": "approved"
+    },
+    {
+      "id": "P_22",
+      "teacher_id": "DOC_10",
+      "pref_type": "avoid_day",
+      "params": {
+        "day": 1
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "El martes evitar dar clase si es posible.",
+      "status": "approved"
+    },
+    {
+      "id": "P_23",
+      "teacher_id": "DOC_11",
+      "pref_type": "max_daily_hours",
+      "params": {
+        "max_hours": 3
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Tope de 3 horas diarias para equilibrar con investigacion.",
+      "status": "approved"
+    },
+    {
+      "id": "P_24",
+      "teacher_id": "DOC_12",
+      "pref_type": "avoid_slot",
+      "params": {
+        "day": 4,
+        "slot": 0
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "Quisiera evitar la franja de las 07:00 los viernes.",
+      "status": "approved"
+    },
+    {
+      "id": "P_25",
+      "teacher_id": "DOC_09",
+      "pref_type": "prefer_room_type",
+      "params": {
+        "room_type": "laboratorio"
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "De preferencia usar laboratorio de computo.",
+      "status": "approved"
+    },
+    {
+      "id": "P_26",
+      "teacher_id": "DOC_10",
+      "pref_type": "compact_schedule",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Clases seguidas sin horas muertas por favor.",
+      "status": "approved"
+    },
+    {
+      "id": "P_27",
+      "teacher_id": "DOC_11",
+      "pref_type": "prefer_afternoon",
+      "params": {},
+      "hard": false,
+      "weight": 1,
+      "source_text": "Prefiero turno de tarde para todas mis materias.",
+      "status": "approved"
+    },
+    {
+      "id": "P_28",
+      "teacher_id": "DOC_12",
+      "pref_type": "max_daily_hours",
+      "params": {
+        "max_hours": 5
+      },
+      "hard": false,
+      "weight": 1,
+      "source_text": "No exceder 5 horas en un mismo dia.",
+      "status": "approved"
+    }
+  ]
+}
