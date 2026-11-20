@@ -20,6 +20,7 @@ class SessionSpec:
     course_id: str
     session_idx: int
     group_idx: int
+    all_group_idxs: tuple[int, ...]
     teacher_idx: int
     room_type: str
     group_size: int
@@ -80,13 +81,16 @@ class FastEvaluator:
         # Penalizacion de aula precalculada por (course_idx, room_idx)
         self.room_pen: list[list[int]] = []
         for c in self.courses:
-            g = self.groups[self.group_idx[c.group_id]]
+            req_size = max(
+                (self.groups[self.group_idx[gid]].size for gid in c.all_group_ids() if gid in self.group_idx),
+                default=0,
+            )
             row = []
             for r in self.rooms:
                 p = 0
                 if c.room_type == "aula" and r.room_type == "laboratorio":
                     p += 2
-                if r.capacity - g.size > 15:
+                if r.capacity - req_size > 15:
                     p += 1
                 row.append(p)
             self.room_pen.append(row)
@@ -102,6 +106,7 @@ class FastEvaluator:
         s_idx = 0
         for ci, c in enumerate(self.courses):
             gi = self.group_idx[c.group_id]
+            all_gis = tuple(self.group_idx[gid] for gid in c.all_group_ids() if gid in self.group_idx)
             ti = self.teacher_idx[c.teacher_id]
             comp = tuple(self.room_idx[r.id] for r in instance.compatible_rooms(c.id))
             t_blk = self.teacher_blocked[ti]
@@ -122,9 +127,10 @@ class FastEvaluator:
                         course_id=c.id,
                         session_idx=k,
                         group_idx=gi,
+                        all_group_idxs=all_gis,
                         teacher_idx=ti,
                         room_type=c.room_type,
-                        group_size=self.groups[gi].size,
+                        group_size=max(self.groups[g_i].size for g_i in all_gis),
                         allowed_rooms=comp,
                         valid_domain=dom_tuple,
                     )
@@ -163,7 +169,6 @@ class FastEvaluator:
         for spec, (d, s, ri) in zip(self.sessions, genes):
             ds = d * S + s
             tk = spec.teacher_idx * DS + ds
-            gk = spec.group_idx * DS + ds
             rk = ri * DS + ds
 
             tc = t_cnt.get(tk, 0)
@@ -171,20 +176,21 @@ class FastEvaluator:
                 hard += 1
             t_cnt[tk] = tc + 1
 
-            gc = g_cnt.get(gk, 0)
-            if gc > 0:
-                hard += 1
-            g_cnt[gk] = gc + 1
+            bit = 1 << s
+            for g_i in spec.all_group_idxs:
+                gk = g_i * DS + ds
+                gc = g_cnt.get(gk, 0)
+                if gc > 0:
+                    hard += 1
+                g_cnt[gk] = gc + 1
+                gd = g_i * D + d
+                g_mask[gd] |= bit
+                g_day_n[gd] += 1
 
             rc = r_cnt.get(rk, 0)
             if rc > 0:
                 hard += 1
             r_cnt[rk] = rc + 1
-
-            bit = 1 << s
-            gd = spec.group_idx * D + d
-            g_mask[gd] |= bit
-            g_day_n[gd] += 1
 
             td = spec.teacher_idx * D + d
             t_mask[td] |= bit

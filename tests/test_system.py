@@ -241,3 +241,49 @@ def test_r6_direct_llm_comparison_and_explainer() -> None:
     assert rep.hard_violations_total > 0  # Evidencia P1: LLM sin solver viola duras en I3
     text, _ = explain_validation_report(i3, rep, llm_cfg=LLMConfig(provider="offline"))
     assert "Conflictos duros" in text
+
+
+def test_itc2007_multi_curriculum_course_prevents_clashes_in_both_curricula() -> None:
+    """Verifica que una materia compartida por 2 curricula en ITC-2007 no se traslape en ninguno."""
+    from kit.instances import parse_itc2007_ctt
+
+    ctt = """Name: multi_curr_test
+Courses: 3
+Rooms: 2
+Days: 2
+Periods_per_day: 3
+Curricula: 2
+Constraints: 0
+
+COURSES:
+c_shared t0 2 2 25
+c_q0 t1 2 2 25
+c_q1 t2 2 2 25
+
+ROOMS:
+R1 30
+R2 30
+
+CURRICULA:
+q0 2 c_shared c_q0
+q1 2 c_shared c_q1
+
+UNAVAILABILITY_CONSTRAINTS:
+
+END.
+"""
+    inst = parse_itc2007_ctt(ctt, instance_id="I1_MC")
+    shared = inst.course_map()["c_shared"]
+    assert set(shared.all_group_ids()) == {"q0", "q1"}
+
+    sch = solve_cpsat(inst, scenario="C", time_limit_sec=2.0)
+    rep = validate_schedule(inst, sch, scenario="C")
+    assert rep.feasible
+
+    # Inyectar un choque entre c_shared y c_q1 (el segundo curriculum!) -> validador debe atraparlo
+    broken = sch.model_copy(deep=True)
+    a_sh = next(a for a in broken.assignments if a.course_id == "c_shared")
+    a_q1 = next(a for a in broken.assignments if a.course_id == "c_q1")
+    a_q1.day, a_q1.slot = a_sh.day, a_sh.slot
+    rep_bad = validate_schedule(inst, broken, scenario="C")
+    assert rep_bad.hard_violations_by_type["group_conflict"] >= 1

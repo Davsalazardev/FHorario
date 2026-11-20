@@ -24,8 +24,9 @@ class LLMConfig:
     provider: str = "auto"  # "auto", "ollama", "gemini", "openai", "offline"
     model: str = ""
     ollama_url: str = "http://localhost:11434"
-    timeout_sec: float = 25.0
+    timeout_sec: float = 45.0
     temperature: float = 0.1
+    max_tokens: int | None = None
 
 
 class LLMUnavailableError(RuntimeError):
@@ -84,6 +85,9 @@ def call_llm_text(
         raise LLMUnavailableError(f"LLM no disponible ({model_name}).")
 
     if provider == "ollama":
+        opts: dict[str, Any] = {"temperature": c.temperature}
+        if c.max_tokens is not None:
+            opts["num_predict"] = c.max_tokens
         payload: dict[str, Any] = {
             "model": model_name,
             "messages": [
@@ -91,7 +95,7 @@ def call_llm_text(
                 {"role": "user", "content": user_prompt},
             ],
             "stream": False,
-            "options": {"temperature": c.temperature},
+            "options": opts,
         }
         if expect_json:
             payload["format"] = "json"

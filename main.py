@@ -32,6 +32,11 @@ def main() -> None:
     p_bm.add_argument("--time-limit", type=float, default=4.0, help="Limite de tiempo (s) por metodo/corrida")
     p_bm.add_argument("--ga-runs", type=int, default=10, help="Corridas independientes del Algoritmo Genetico")
     p_bm.add_argument("--provider", type=str, default="auto", choices=["auto", "ollama", "gemini", "openai", "offline"])
+    p_bm.add_argument("--model", type=str, default="", help="Nombre de modelo especifico (ej. qwen2.5:7b)")
+
+    # tuning
+    p_tun = sub.add_parser("tune-ga", help="Ejecuta el barrido de hiperparametros de R3 (Algoritmo Genetico)")
+    p_tun.add_argument("--time-limit", type=float, default=2.5)
 
     # solve
     p_sol = sub.add_parser("solve", help="Resuelve una instancia (I1, I2, I3 o archivo Excel) y exporta Excel/PDF")
@@ -44,6 +49,7 @@ def main() -> None:
     # eval-r5
     p_r5 = sub.add_parser("eval-r5", help="Evalua R5 (extractor de preferencias) con Precision, Recall y F1")
     p_r5.add_argument("--provider", type=str, default="auto", choices=["auto", "ollama", "gemini", "openai", "offline"])
+    p_r5.add_argument("--model", type=str, default="", help="Nombre de modelo especifico (ej. qwen2.5:7b)")
 
     # init-kit
     sub.add_parser("init-kit", help="Genera los archivos del kit comun (JSON, .ctt, plantillas Excel)")
@@ -58,7 +64,7 @@ def main() -> None:
         return
 
     if args.cmd == "benchmark":
-        cfg = LLMConfig(provider=args.provider)
+        cfg = LLMConfig(provider=args.provider, model=args.model)
         prov, model = detect_backend(cfg)
         print(f"Backend LLM detectado: {prov} ({model})")
         results = run_full_benchmark(
@@ -72,8 +78,14 @@ def main() -> None:
         print(f"Tabla de posiciones: {PROJECT_ROOT / 'results' / 'leaderboard.csv'}")
         return
 
+    if args.cmd == "tune-ga":
+        from src.evaluation.tuning import run_ga_tuning
+        res = run_ga_tuning(PROJECT_ROOT / "results" / "tuning_results.json", time_limit_sec=args.time_limit)
+        print(json.dumps(res, ensure_ascii=False, indent=2))
+        return
+
     if args.cmd == "eval-r5":
-        cfg = LLMConfig(provider=args.provider)
+        cfg = LLMConfig(provider=args.provider, model=args.model)
         res = evaluate_extractor(llm_cfg=cfg)
         print(json.dumps({k: v for k, v in res.items() if k != "details"}, ensure_ascii=False, indent=2))
         return

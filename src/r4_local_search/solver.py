@@ -24,10 +24,11 @@ def _build_occupancy(
     r_occ: dict[tuple[int, int, int], int] = {}
     for spec, (d, s, ri) in zip(ev.sessions, genes):
         tk = (spec.teacher_idx, d, s)
-        gk = (spec.group_idx, d, s)
         rk = (ri, d, s)
         t_occ[tk] = t_occ.get(tk, 0) + 1
-        g_occ[gk] = g_occ.get(gk, 0) + 1
+        for gi in spec.all_group_idxs:
+            gk = (gi, d, s)
+            g_occ[gk] = g_occ.get(gk, 0) + 1
         r_occ[rk] = r_occ.get(rk, 0) + 1
     return t_occ, g_occ, r_occ
 

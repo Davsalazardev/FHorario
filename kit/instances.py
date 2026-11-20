@@ -108,13 +108,15 @@ def parse_itc2007_ctt(ctt_text: str, instance_id: str = "I1") -> Instance:
     day_names = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"][:num_days]
     slot_labels = [f"{7 + s:02d}:00-{8 + s:02d}:00" for s in range(periods)]
 
-    # Mapear curso -> curriculum (grupo)
-    course_to_group: dict[str, str] = {}
+    # Mapear curso -> lista de curricula (un curso en ITC-2007 puede pertenecer a >1 curriculum)
+    course_to_groups: dict[str, list[str]] = {}
     group_sizes: dict[str, int] = {}
     course_students = {c[0]: c[4] for c in raw_courses}
     for qid, cids in curricula.items():
         for cid in cids:
-            course_to_group[cid] = qid
+            course_to_groups.setdefault(cid, [])
+            if qid not in course_to_groups[cid]:
+                course_to_groups[cid].append(qid)
         group_sizes[qid] = max((course_students.get(cid, 25) for cid in cids), default=25)
 
     # Mapear indisponibilidades de curso a su docente
@@ -154,7 +156,8 @@ def parse_itc2007_ctt(ctt_text: str, instance_id: str = "I1") -> Instance:
         Course(
             id=cid,
             name=f"Curso {cid}",
-            group_id=course_to_group.get(cid, groups[0].id),
+            group_id=(course_to_groups.get(cid) or [groups[0].id])[0],
+            extra_group_ids=(course_to_groups.get(cid) or [groups[0].id])[1:],
             teacher_id=tid,
             sessions_per_week=lectures,
             room_type="aula",

@@ -162,12 +162,16 @@ def extract_preferences_from_text(
         resp_text, backend = call_llm_text(
             EXTRACTION_SYSTEM_PROMPT, user_msg, cfg=llm_cfg, expect_json=True
         )
-        parsed = parse_json_from_llm(resp_text)
-        if isinstance(parsed, dict) and isinstance(parsed.get("constraints"), list):
-            raw_items = parsed["constraints"]
-        elif isinstance(parsed, list):
-            raw_items = parsed
-    except (LLMUnavailableError, Exception):
+        try:
+            parsed = parse_json_from_llm(resp_text)
+            if isinstance(parsed, dict) and isinstance(parsed.get("constraints"), list):
+                raw_items = parsed["constraints"]
+            elif isinstance(parsed, list):
+                raw_items = parsed
+        except Exception:
+            # Si un LLM real devolvio JSON malformado, no ocultar el error con reglas offline
+            raw_items = []
+    except LLMUnavailableError:
         raw_items = extract_preferences_offline_nlp(text)
         backend = "offline_nlp_baseline"
 

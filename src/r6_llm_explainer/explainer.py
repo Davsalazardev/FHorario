@@ -54,9 +54,10 @@ def _norm(text: str) -> str:
 # 1. HORARIO PEDIDO DIRECTO AL LLM (P1) - CON Y SIN CORRECCIONES DEL VALIDADOR
 # =============================================================================
 
-_DIRECT_SCHEDULE_SYSTEM = """Eres un asistente al que se le pide generar un horario universitario completo en JSON.
-Devuelve UNICAMENTE un JSON: {"assignments": [{"course_id": "...", "session_idx": 0, "day": 0, "slot": 0, "room_id": "..."}]}
-Respeta dias 0..D-1, franjas 0..S-1 y el numero exacto de sesiones por asignatura.
+_DIRECT_SCHEDULE_SYSTEM = """Genera un horario universitario completo en JSON compacto.
+Devuelve UNICAMENTE JSON con una lista de tuplas [course_id, day, slot, room_id]:
+{"a": [["c0001", 0, 0, "R1"], ["c0001", 1, 2, "R1"]]}
+Sin texto extra, respetando dias 0..D-1, franjas 0..S-1 y el numero exacto de sesiones por curso.
 """
 
 
@@ -186,6 +187,54 @@ def _simulate_autoregressive_llm_schedule(
     return sch
 
 
+def _parse_llm_assignments_lenient(raw_text: str) -> tuple[list[Assignment], str | None]:
+    """Parsea asignaciones devueltas por un LLM real (formato compacto [cid,d,s,rid] o dict)."""
+    try:
+        parsed = parse_json_from_llm(raw_text)
+    except Exception as exc:
+        return [], f"json_parse_error: {exc}"
+    if isinstance(parsed, dict):
+        items = parsed.get("a") or parsed.get("assignments") or []
+    else:
+        items = parsed
+    if not isinstance(items, list):
+        return [], "unexpected_json_structure"
+    out: list[Assignment] = []
+    per_course: dict[str, int] = {}
+    for item in items:
+        if isinstance(item, list) and len(item) >= 4:
+            cid = str(item[0]).strip()
+            rid = str(item[3]).strip()
+            try:
+                d, s = int(item[1]), int(item[2])
+            except (TypeError, ValueError):
+                d, s = -1, -1
+            sidx = per_course.get(cid, 0)
+            per_course[cid] = sidx + 1
+            if cid:
+                out.append(Assignment(course_id=cid, session_idx=sidx, day=d, slot=s, room_id=rid))
+        elif isinstance(item, dict):
+            cid = str(item.get("course_id", item.get("course", ""))).strip()
+            rid = str(item.get("room_id", item.get("room", ""))).strip()
+            try:
+                d = int(item.get("day", -1))
+                s = int(item.get("slot", -1))
+            except (TypeError, ValueError):
+                d, s = -1, -1
+            sidx_raw = item.get("session_idx")
+            if sidx_raw is None:
+                sidx = per_course.get(cid, 0)
+            else:
+                try:
+                    sidx = int(sidx_raw)
+                except (TypeError, ValueError):
+                    sidx = per_course.get(cid, 0)
+            per_course[cid] = per_course.get(cid, 0) + 1
+            if cid:
+                out.append(Assignment(course_id=cid, session_idx=sidx, day=d, slot=s, room_id=rid))
+    return out, None
+
+
 def generate_direct_llm_schedule(
     instance: Instance,
     with_validator_feedback: bool = False,
@@ -201,13 +250,6 @@ def generate_direct_llm_schedule(
         else "LLM directo (sin validador)"
     )
 
-    summary_inst = {
-        "days": instance.days,
-        "slots": instance.slot_labels,
-        "rooms": [{"id": r.id, "type": r.room_type, "cap": r.capacity, "blocked": r.blocked_slots_list}
-                  for r in []],
-    }
-    _ = summary_inst  # construido limpio abajo
     compact_prompt = {
         "days": list(range(instance.num_days)),
         "valid_slots": instance.valid_slots(),
@@ -230,42 +272,59 @@ def generate_direct_llm_schedule(
         ],
     }
 
+    # Dar timeout acotado y limite de tokens para JSON compacto (evita loops infinitos en Ollama)
+    eff_cfg = copy.deepcopy(llm_cfg) if llm_cfg else LLMConfig()
+    eff_cfg.timeout_sec = max(eff_cfg.timeout_sec, 90.0)
+    eff_cfg.max_tokens = eff_cfg.max_tokens or min(2400, max(900, instance.total_sessions() * 18))
+
     try:
         user_msg = (
-            "Genera un horario completo valido sin traslapes de docente, grupo ni aula.\n"
+            f"Genera un horario completo valido sin traslapes de docente, grupo ni aula.\n"
+            f"Devuelve exactamente {instance.total_sessions()} elementos en 'a': [[course_id, day, slot, room_id], ...].\n"
             f"Instancia:\n{json.dumps(compact_prompt, ensure_ascii=False)}"
         )
-        raw, backend = call_llm_text(_DIRECT_SCHEDULE_SYSTEM, user_msg, cfg=llm_cfg, expect_json=True)
-        parsed = parse_json_from_llm(raw)
-        items = parsed.get("assignments", []) if isinstance(parsed, dict) else parsed
-        assignments = [Assignment.model_validate(a) for a in items]
+        try:
+            raw, backend = call_llm_text(_DIRECT_SCHEDULE_SYSTEM, user_msg, cfg=eff_cfg, expect_json=True)
+            assignments, parse_err = _parse_llm_assignments_lenient(raw)
+        except LLMUnavailableError:
+            raise
+        except Exception as exc:
+            assignments, parse_err = [], f"llm_runtime_error: {exc}"
+            backend = f"{eff_cfg.provider}:{eff_cfg.model or 'auto'}"
+
         sch = Schedule(
             instance_id=instance.id,
             method=method_name,
             scenario="C",
             assignments=assignments,
             solve_time_sec=round(time.perf_counter() - t0, 4),
-            metadata={"backend": backend, "live_llm": True},
+            metadata={"backend": backend, "live_llm": True, "parse_error": parse_err},
         )
         if with_validator_feedback:
             for r_idx in range(feedback_rounds):
                 rep = validate_schedule(instance, sch, scenario="C")
                 if rep.feasible:
                     break
-                err_summary = [v.message for v in rep.hard_violation_details[:20]]
+                err_summary = [v.message for v in rep.hard_violation_details[:15]]
                 fb_msg = (
-                    f"El validador detecto {rep.hard_violations_total} violaciones duras:\n"
+                    f"Instancia:\n{json.dumps(compact_prompt, ensure_ascii=False)}\n\n"
+                    f"Tu horario previo tuvo {rep.hard_violations_total} violaciones duras "
+                    f"({rep.hard_violations_by_type}). Ejemplos:\n"
                     + "\n".join(f"- {m}" for m in err_summary)
-                    + "\nCorrige el JSON completo de assignments."
+                    + f"\nCorrige y devuelve JSON compacto 'a' con exactamente {instance.total_sessions()} tuplas [course_id, day, slot, room_id]."
                 )
-                raw2, _ = call_llm_text(_DIRECT_SCHEDULE_SYSTEM, fb_msg, cfg=llm_cfg, expect_json=True)
-                parsed2 = parse_json_from_llm(raw2)
-                items2 = parsed2.get("assignments", []) if isinstance(parsed2, dict) else parsed2
-                sch.assignments = [Assignment.model_validate(a) for a in items2]
+                try:
+                    raw2, _ = call_llm_text(_DIRECT_SCHEDULE_SYSTEM, fb_msg, cfg=eff_cfg, expect_json=True)
+                    assignments2, parse_err2 = _parse_llm_assignments_lenient(raw2)
+                    if assignments2:
+                        sch.assignments = assignments2
+                    sch.metadata["last_parse_error"] = parse_err2
+                except Exception as exc:
+                    sch.metadata["last_parse_error"] = f"llm_feedback_error: {exc}"
                 sch.metadata["feedback_rounds"] = r_idx + 1
             sch.solve_time_sec = round(time.perf_counter() - t0, 4)
         return sch
-    except (LLMUnavailableError, Exception):
+    except LLMUnavailableError:
         return _simulate_autoregressive_llm_schedule(
             instance,
             seed=seed,
@@ -278,12 +337,16 @@ def generate_direct_llm_schedule(
 # 2. EXPLICADOR DE CONFLICTOS Y CALIDAD PARA COORDINACION (P4)
 # =============================================================================
 
-_EXPLAIN_SYSTEM_PROMPT = """Eres R6, el asistente explicador del Sistema Inteligente de Horarios de ITIID.
+_EXPLAIN_SYSTEM_PROMPT = """Eres R6, el asistente explicador del Sistema Inteligente de Horarios de ITIID (UPV).
 Tu trabajo NO es asignar clases, sino explicar de forma clara, breve y accionable para la coordinacion academica:
 1. Si el horario es valido o que conflictos duros detecto el validador oficial.
-2. Donde se concentran las penalizaciones blandas (horas muertas, huecos docentes, preferencias).
-3. Que 2 o 3 ajustes concretos conviene considerar antes de volver a ejecutar el motor CP-SAT.
-Responde en espanol claro con vinetas.
+2. Donde se concentran las penalizaciones blandas:
+   - student_gaps = horas muertas entre clases de estudiantes.
+   - teacher_gaps = huecos libres entre clases en el horario de un docente (NO son faltas ni inasistencias).
+   - course_spread = sesiones repetidas de la misma materia en un mismo dia.
+   - preferences = preferencias docentes blandas no cumplidas.
+3. Que 2 o 3 ajustes concretos conviene considerar (ej. cambiar a Escenario A o B) antes de re-ejecutar CP-SAT.
+Usa listas Markdown con guiones '-' (nunca escribas la palabra 'Vineta'). Se fiel a los numeros del reporte.
 """
 
 

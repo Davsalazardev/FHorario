@@ -69,7 +69,8 @@ def build_base_cpsat_model(instance: Instance) -> BaseCPSATContext:
                     y[(c.id, d, s)] = yv
                     course_all_vars.append(yv)
                     teacher_slot_vars[(c.teacher_id, d, s)].append(yv)
-                    group_slot_vars[(c.group_id, d, s)].append(yv)
+                    for gid in c.all_group_ids():
+                        group_slot_vars[(gid, d, s)].append(yv)
 
         # Restriccion dura: cobertura exacta de sesiones semanales por asignatura
         model.Add(sum(course_all_vars) == c.sessions_per_week)

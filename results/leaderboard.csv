@@ -1,18 +1,18 @@
 instance_id,rank,method,scenario,feasible,hard_violations,soft_penalty,student_dead_hours,teacher_gaps,preferences_pct,solve_time_sec
-I1,1,CP-SAT (Escenario C),C,True,0,0,0,0,100.0,0.0644
-I1,2,Algoritmo Genetico (Esc. C),C,True,0,0,0,0,100.0,3.0
-I1,3,"Busqueda Local (MRV + Hill Climbing, Esc. C)",C,True,0,0,0,0,100.0,3.0002
-I1,4,LLM directo + feedback validador,C,True,0,228,14,18,100.0,0.0006
-I1,5,LLM directo (sin validador),C,False,13,324,20,24,100.0,0.0001
-I2,1,CP-SAT (Escenario C),C,True,0,60,0,0,85.71,1.0119
-I2,2,Algoritmo Genetico (Esc. C),C,True,0,96,1,0,71.43,3.0
-I2,3,"Busqueda Local (MRV + Hill Climbing, Esc. C)",C,True,0,102,2,1,71.43,3.0002
-I2,4,LLM directo + feedback validador,C,True,0,742,18,33,21.43,0.0011
-I2,5,Horario manual (coordinacion),C,True,0,852,17,34,14.29,0.0
-I2,6,LLM directo (sin validador),C,False,22,726,22,27,28.57,0.0001
-I3,1,CP-SAT (Escenario C),C,True,0,276,10,1,53.57,3.0505
-I3,2,"Busqueda Local (MRV + Hill Climbing, Esc. C)",C,True,0,420,7,10,42.86,3.0003
-I3,3,Algoritmo Genetico (Esc. C),C,True,0,1272,59,91,32.14,3.104
+I1,1,CP-SAT (Escenario C),C,True,0,0,0,0,100.0,0.2445
+I1,2,"Busqueda Local (MRV + Hill Climbing, Esc. C)",C,True,0,0,0,0,100.0,3.0002
+I1,3,Algoritmo Genetico (Esc. C),C,True,0,0,0,0,100.0,3.0002
+I1,4,LLM directo (sin validador) [qwen2.5:7b],C,False,10,156,13,13,100.0,62.236
+I1,5,LLM directo + feedback validador [qwen2.5:7b],C,False,15,120,8,12,100.0,113.6015
+I2,1,CP-SAT (Escenario C),C,True,0,60,0,0,85.71,2.4774
+I2,2,Algoritmo Genetico (Esc. C),C,True,0,108,3,2,64.29,3.0004
+I2,3,"Busqueda Local (MRV + Hill Climbing, Esc. C)",C,True,0,138,0,1,50.0,3.001
+I2,4,Horario manual (coordinacion),C,True,0,852,17,34,14.29,0.0
+I2,5,LLM directo (sin validador) [qwen2.5:7b],C,False,29,168,13,4,64.29,48.2809
+I2,6,LLM directo + feedback validador [qwen2.5:7b],C,False,29,168,13,4,64.29,120.6032
+I3,1,Algoritmo Genetico (Esc. C),C,True,0,408,13,8,60.71,3.001
+I3,2,CP-SAT (Escenario C),C,True,0,412,4,7,53.57,3.1094
+I3,3,"Busqueda Local (MRV + Hill Climbing, Esc. C)",C,True,0,488,7,15,39.29,3.003
 I3,4,Horario manual (coordinacion),C,True,0,1946,55,84,28.57,0.0
-I3,5,LLM directo + feedback validador,C,False,3,2296,57,93,21.43,0.0056
-I3,6,LLM directo (sin validador),C,False,90,2576,75,107,10.71,0.0004
+I3,5,LLM directo + feedback validador [qwen2.5:7b],C,False,116,160,7,5,75.0,173.9096
+I3,6,LLM directo (sin validador) [qwen2.5:7b],C,False,135,130,1,4,71.43,69.8304

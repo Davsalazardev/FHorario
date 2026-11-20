@@ -124,12 +124,21 @@ class Course(BaseModel):
     id: str
     name: str
     group_id: str
+    extra_group_ids: list[str] = Field(default_factory=list)
     teacher_id: str
     sessions_per_week: int
     room_type: RoomType = "aula"
     required_equipment: list[str] = Field(default_factory=list)
     max_sessions_per_day: int = 2
     quarter: int = 7
+
+    def all_group_ids(self) -> list[str]:
+        """Devuelve todos los grupos/curricula asociados (soporte multi-curriculum ITC-2007)."""
+        seen: list[str] = [self.group_id]
+        for gid in self.extra_group_ids:
+            if gid not in seen:
+                seen.append(gid)
+        return seen
 
 
 class Preference(BaseModel):
@@ -228,8 +237,9 @@ class Instance(BaseModel):
         return (day, slot) not in r.blocked_slots()
 
     def is_room_suitable(self, course: Course, room: Room) -> bool:
-        g = self.group_map()[course.group_id]
-        if room.capacity < g.size:
+        gmap = self.group_map()
+        req_size = max((gmap[gid].size for gid in course.all_group_ids() if gid in gmap), default=0)
+        if room.capacity < req_size:
             return False
         if course.room_type == "laboratorio" and room.room_type != "laboratorio":
             return False

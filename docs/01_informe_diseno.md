@@ -126,7 +126,17 @@ flowchart TD
 
 ---
 
-## 6. Referencias
+## 6. Marco teórico y relación con los referentes del curso
+
+El diseño arquitectónico y experimental de este sistema se fundamenta directamente en las lecturas clave del proyecto:
+
+1. **Alharbi (2026) — *LLMs as Autonomous Solvers for University Course Timetabling*:** Demuestra empíricamente que los modelos de lenguaje producen salidas con apariencia de horario pero fallan al garantizar restricciones duras conforme crece el número de sesiones y recursos compartidos. De esta evidencia surge nuestra **regla central de diseño** (el LLM nunca asigna clases en producción) y el experimento de la pregunta guía **`P1`**, donde evaluamos horarios directos de un LLM local (`qwen2.5:7b`) con y sin retroalimentación del validador oficial.
+2. **MIWAI (2025) — *Two-Stage Fuzzy-Guided Genetic Algorithm with LLM-Based Preference Parsing*:** Inspira directamente el patrón híbrido de dos etapas: primero usar un LLM (`R5`) para traducir preferencias expresadas en lenguaje natural a restricciones estructuradas (evaluadas en `P2` con Precisión, Recall y F1 por tipo, con revisión humana intermedia `pending_review`), y después alimentar esas restricciones a motores de optimización (`R2` CP-SAT y `R3` Algoritmo Genético memético).
+3. **TRACE-cs (2024) — *A Hybrid Logic–LLM System for Explainable Course Scheduling*:** Fundamenta la separación entre lógica formal (encargada de factibilidad y optimalidad) y capa explicativa (`R6`), donde el LLM traduce diagnósticos de conflictos del validador y resultados de reprogramación (`I4`) a explicaciones comprensibles para coordinación académica (`P4`).
+4. **Ceschia, Di Gaspero y Schaerf — *Educational Timetabling: Problems, Benchmarks, and State-of-the-Art Results*:** Sustenta el uso del estándar **CB-CTT de ITC-2007 (`I1`)** con soporte multi-curriculum (`all_group_ids()`), la comparación justa bajo el mismo límite de tiempo y el uso de métricas estandarizadas de factibilidad y penalización blanda.
+5. **FET y Timefold Solver:** Sirven como referencia práctica de modelado de lecciones/franjas/aulas y presentación visual por docente, grupo, aula y sábana general.
+
+## 7. Referencias
 
 1. Alharbi, B. (2026). *Assessing the Effectiveness of LLMs as Autonomous Solvers for University Course Timetabling*. The International Arab Journal of Information Technology, 23(5), 893–907.
 2. *A Two-Stage Fuzzy-Guided Genetic Algorithm for University Timetabling with LLM-Based Preference Parsing* (2025). MIWAI 2025, Springer.

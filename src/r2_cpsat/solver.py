@@ -145,11 +145,11 @@ def _add_soft_objective(
         for (cid, d, s, rid), var in ctx.x.items():
             c = courses[cid]
             r = rooms[rid]
-            g = groups[c.group_id]
+            req_size = max((groups[gid].size for gid in c.all_group_ids() if gid in groups), default=0)
             pen = 0
             if c.room_type == "aula" and r.room_type == "laboratorio":
                 pen += 2
-            if r.capacity - g.size > 15:
+            if r.capacity - req_size > 15:
                 pen += 1
             if pen > 0:
                 terms.append((pen * weights.room_utilization) * var)

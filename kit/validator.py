@@ -193,7 +193,8 @@ def validate_schedule(
         valid_assignments.append(a)
         course_sessions[a.course_id].append(a)
         teacher_at[(course.teacher_id, a.day, a.slot)].append(a)
-        group_at[(course.group_id, a.day, a.slot)].append(a)
+        for gid in course.all_group_ids():
+            group_at[(gid, a.day, a.slot)].append(a)
         room_at[(a.room_id, a.day, a.slot)].append(a)
 
         # Disponibilidad de docente (incluye recursos compartidos y restricciones duras)
@@ -280,8 +281,9 @@ def validate_schedule(
     for a in valid_assignments:
         c = courses[a.course_id]
         r = rooms[a.room_id]
-        g = groups[c.group_id]
-        group_day_slots[(c.group_id, a.day)].append(a.slot)
+        req_size = max((groups[gid].size for gid in c.all_group_ids() if gid in groups), default=0)
+        for gid in c.all_group_ids():
+            group_day_slots[(gid, a.day)].append(a.slot)
         teacher_day_slots[(c.teacher_id, a.day)].append(a.slot)
         teacher_all_assignments[c.teacher_id].append(a)
         course_day_counts[(c.id, a.day)] += 1
@@ -289,7 +291,7 @@ def validate_schedule(
         # Uso adecuado de aulas y laboratorios
         if c.room_type == "aula" and r.room_type == "laboratorio":
             room_util_units += 2
-        if r.capacity - g.size > 15:
+        if r.capacity - req_size > 15:
             room_util_units += 1
 
     # 1. Horas muertas y jornadas excesivas de estudiantes

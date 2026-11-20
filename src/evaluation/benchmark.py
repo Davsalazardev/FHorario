@@ -80,7 +80,7 @@ def run_full_benchmark(
     best_schedules: dict[str, Schedule] = {}
     llm_direct_comparison: list[dict[str, Any]] = []
 
-    ga_cfg = GAConfig(pop_size=28, crossover_rate=0.85, mutation_rate=0.35, tournament_k=3, elitism=2)
+    ga_cfg = GAConfig()
 
     for inst in instances_to_eval:
         print(f"[Benchmark] Evaluando {inst.id} ({inst.total_sessions()} sesiones)...")
