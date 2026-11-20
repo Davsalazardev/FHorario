@@ -59,40 +59,25 @@ _CUSTOM_CSS = """
 html, body, [class*="css"] {
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-.stApp {
-    background-color: #F7F8FA;
-    color: #102A43;
-}
-section[data-testid="stSidebar"] {
-    background-color: #0F2A44;
-    color: #F0F4F8;
-}
-section[data-testid="stSidebar"] * {
-    color: #F0F4F8;
-}
-section[data-testid="stSidebar"] .stSelectbox div[data-baseweb="select"] *,
-section[data-testid="stSidebar"] input {
-    color: #102A43 !important;
-}
 .itiid-banner {
     background: #0F2A44;
     color: #FFFFFF;
-    padding: 1.25rem 1.5rem;
+    padding: 1.15rem 1.45rem;
     border-radius: 10px;
     border-left: 6px solid #D97706;
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.0rem;
 }
 .itiid-banner h1 {
     margin: 0;
-    font-size: 1.55rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: #FFFFFF;
 }
 .itiid-banner p {
-    margin: 0.35rem 0 0 0;
-    font-size: 0.92rem;
-    color: #BCCCDC;
+    margin: 0.3rem 0 0 0;
+    font-size: 0.9rem;
+    color: #D9E2EC;
 }
 .status-pill {
     display: inline-block;
@@ -101,65 +86,67 @@ section[data-testid="stSidebar"] input {
     font-size: 0.78rem;
     font-weight: 600;
     margin-right: 0.4rem;
+    margin-bottom: 0.35rem;
 }
 .pill-ok { background: #D1FAE5; color: #065F46; }
 .pill-bad { background: #FEE2E2; color: #991B1B; }
 .pill-warn { background: #FEF3C7; color: #92400E; }
 .pill-info { background: #DBEAFE; color: #1E40AF; }
 
-/* Tabla visual de horarios */
+/* Tabla visual de horarios — ajuste completo sin scroll innecesario */
 .tt-wrap {
     overflow-x: auto;
     background: #FFFFFF;
-    border: 1px solid #D9E2EC;
+    border: 1px solid #CBD5E1;
     border-radius: 10px;
-    padding: 0.5rem;
+    padding: 0.45rem;
     margin-top: 0.5rem;
 }
 .tt-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
-    font-size: 0.82rem;
+    font-size: 0.79rem;
 }
 .tt-table th {
     background: #0F2A44;
     color: #FFFFFF;
-    padding: 0.55rem 0.5rem;
+    padding: 0.5rem 0.35rem;
     text-align: center;
     font-weight: 600;
     border: 1px solid #243B53;
 }
 .tt-table td {
     border: 1px solid #D9E2EC;
-    padding: 0.38rem 0.42rem;
+    padding: 0.3rem 0.32rem;
     vertical-align: top;
-    min-width: 135px;
+    word-wrap: break-word;
 }
 .tt-time {
     background: #F0F4F8;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 600;
-    font-size: 0.76rem;
-    color: #243B53;
+    font-size: 0.72rem;
+    color: #102A43;
     text-align: center;
     white-space: nowrap;
-    min-width: 98px !important;
+    width: 88px;
 }
 .tt-card {
     border-radius: 6px;
-    padding: 0.35rem 0.45rem;
+    padding: 0.3rem 0.4rem;
     margin-bottom: 0.2rem;
     border-left: 4px solid #1D4ED8;
-    line-height: 1.25;
+    line-height: 1.22;
 }
 .tt-card .tt-course {
     font-weight: 700;
     color: #102A43;
-    font-size: 0.80rem;
+    font-size: 0.76rem;
 }
 .tt-card .tt-meta {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.71rem;
+    font-size: 0.68rem;
     color: #334E68;
     margin-top: 2px;
 }
@@ -172,18 +159,19 @@ section[data-testid="stSidebar"] input {
         #FECACA 12px
     );
     color: #991B1B;
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.69rem;
+    font-weight: 700;
     text-align: center;
-    padding: 0.55rem 0.25rem;
+    padding: 0.45rem 0.2rem;
     border-radius: 5px;
 }
 .pref-card {
     background: #FFFFFF;
-    border: 1px solid #D9E2EC;
+    border: 1px solid #CBD5E1;
     border-radius: 8px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 0.6rem;
+    padding: 0.7rem 0.95rem;
+    margin-bottom: 0.55rem;
+    color: #102A43;
 }
 </style>
 """
@@ -408,7 +396,7 @@ def main() -> None:
     # TAB 1: GENERAR, VALIDAR Y VISUALIZAR
     # =========================================================================
     with tabs[0]:
-        col_btn, col_info = st.columns([1.2, 2.8])
+        col_btn, col_info = st.columns([1.8, 2.6])
         with col_btn:
             run_clicked = st.button("Generar y validar horario", type="primary", use_container_width=True)
         with col_info:
@@ -585,7 +573,7 @@ def main() -> None:
                     "rejected": ("pill-bad", "RECHAZADA"),
                 }[pref.status]
 
-                c_info, c_ok, c_no = st.columns([4.2, 0.9, 0.9])
+                c_info, c_ok, c_no = st.columns([3.6, 1.2, 1.2])
                 with c_info:
                     st.markdown(
                         f"<div class='pref-card'>"
